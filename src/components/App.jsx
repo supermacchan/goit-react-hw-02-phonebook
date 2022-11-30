@@ -35,9 +35,17 @@ export class App extends Component {
     this.setState({
       filter: event.currentTarget.value,
     })
+  };
+
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
   }
 
   render() {
+    const filteredContacts = this.getFilteredContacts();
+
     return (
       <>
         <h1 className={css.phonebook__title}>Phonebook</h1>
@@ -50,7 +58,7 @@ export class App extends Component {
           value={this.state.filter}
           onChange={this.changeFilter}
         />
-        <ContactList contacts={this.state.contacts} />
+        <ContactList contacts={filteredContacts} />
       </>
     );
   } 
