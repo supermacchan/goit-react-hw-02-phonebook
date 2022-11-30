@@ -4,8 +4,7 @@ import css from './ContactForm.module.css';
 
 export class ContactForm extends Component {
     static propTypes = {
-        input: PropTypes.func.isRequired,
-        submit: PropTypes.func.isRequired,
+        onSubmit: PropTypes.func.isRequired,
     };
 
     state = {
@@ -19,11 +18,26 @@ export class ContactForm extends Component {
         })
     }
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.props.onSubmit(this.state);
+        event.target[0].value = '';
+        event.target[1].value = '';
+        this.reset();
+    }
+
+    reset = () => {
+        this.setState({
+        name: '',
+        number: '',
+        });
+    }
+
     render() {
         return (
             <form
                 className={css.phonebook__form}
-                onSubmit={this.props.submit}
+                onSubmit={this.handleFormSubmit}
             >
                 <label
                     htmlFor="nameInputId"
@@ -38,7 +52,7 @@ export class ContactForm extends Component {
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     id="nameInputId"
                     required
-                    onChange={this.props.input}
+                    onChange={this.hadleInputChange}
                     className={css.phonebook__input}
                 />
                 <label
@@ -54,7 +68,7 @@ export class ContactForm extends Component {
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     id="telInputId"
                     required
-                    onChange={this.props.input}
+                    onChange={this.hadleInputChange}
                     className={css.phonebook__input}
                 />
                 <button
