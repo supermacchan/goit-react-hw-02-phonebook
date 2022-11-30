@@ -1,0 +1,7 @@
+.contacts__listItem {
+    margin-bottom: 12px;
+}
+
+.contacts__listItem:last-of-type {
+    margin-bottom: 0;
+}

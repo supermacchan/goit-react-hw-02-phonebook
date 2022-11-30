@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { nanoid } from "nanoid";
 import { ContactForm } from "./ContactForm/ContactForm";
+import { ContactList } from "./ContactList/ContactList";
 
 import css from './App.module.css';
 
@@ -82,14 +83,8 @@ export class App extends Component {
           <button type="submit">Add Contact</button>
         </form> */}
 
-        <h2 className="contacts__title">Contacts</h2>
-        <ul className="contacts__list">
-          {this.state.contacts.map(contact => {
-            return (
-              <li key={contact.id}>{contact.name}: {contact.number}</li>
-            );
-          })}
-        </ul>
+        <h2 className={css.contacts__title}>Contacts</h2>
+        <ContactList contacts={this.state.contacts} />
       </>
     );
   } 
