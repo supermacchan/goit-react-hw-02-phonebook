@@ -4,11 +4,11 @@ import css from './ContactListItem.module.css';
 
 export class ContactListItem extends Component {
     static propTypes = {
-        contacts: PropTypes.arrayOf({
+        contacts: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             number: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired,
-        }).isRequired,
+        })).isRequired,
     };
 
     render() {

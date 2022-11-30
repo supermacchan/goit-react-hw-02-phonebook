@@ -5,7 +5,7 @@ import { ContactListItem } from "./ContactListItem";
 
 export class ContactList extends Component {
     static propTypes = {
-        contacts: PropTypes.arrayOf({}).isRequired,
+        contacts: PropTypes.arrayOf(PropTypes.shape({ })).isRequired,
     };
 
     render() {
