@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { nanoid } from "nanoid";
+
 import { ContactForm } from "./ContactForm/ContactForm";
 import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
@@ -18,12 +19,13 @@ export class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = data => {
+  formSubmitHandler = ({name, number}) => {
     const newContact = [{
       id: nanoid(),
-      name: data.name,
-      number: data.number,
+      name: name,
+      number: number,
     }]
+    
     this.setState(prevState => {
       return {
         contacts: prevState.contacts.concat(newContact),
