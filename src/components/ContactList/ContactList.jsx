@@ -6,15 +6,22 @@ import { ContactListItem } from "./ContactListItem";
 export const ContactList = ({ contacts, onDeleteContact }) => {
         return (
             <ul className={css.contacts__list}>
-                <ContactListItem
-                    contacts={contacts}
-                    onDeleteContact={onDeleteContact}
-                />
+                {contacts.map(contact =>
+                    <ContactListItem
+                        contacts={contact}
+                        onDeleteContact={onDeleteContact}
+                        key={contact.id}
+                    />
+                )}
             </ul>
         );
 }
 
 ContactList.propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    contacts: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+    })).isRequired,
     onDeleteContact: PropTypes.func.isRequired,
 };

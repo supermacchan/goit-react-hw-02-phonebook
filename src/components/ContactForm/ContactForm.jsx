@@ -21,8 +21,6 @@ export class ContactForm extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         this.props.onSubmit(this.state);
-        event.target[0].value = '';
-        event.target[1].value = '';
         this.reset();
     }
 
@@ -54,6 +52,7 @@ export class ContactForm extends Component {
                     required
                     onChange={this.hadleInputChange}
                     className={css.phonebook__input}
+                    value={this.state.name}
                 />
                 <label
                     htmlFor="telInputId"
@@ -70,6 +69,7 @@ export class ContactForm extends Component {
                     required
                     onChange={this.hadleInputChange}
                     className={css.phonebook__input}
+                    value={this.state.number}
                 />
                 <button
                     type="submit"
