@@ -19,25 +19,25 @@ export class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = ({name, number}) => {
-    const newContact = [{
-      id: nanoid(),
-      name: name,
-      number: number,
-    }];
-
+  formSubmitHandler = ({ name, number }) => {
     const availabilityCheck = this.checkContact(name);
 
     if (availabilityCheck !== undefined) {
       alert(`${name} is already in contacts.`);
       return;
-    } else {
-      this.setState(prevState => {
+    };
+
+    const newContact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
+
+    this.setState(prevState => {
       return {
-        contacts: prevState.contacts.concat(newContact),
+        contacts: [newContact, ...prevState.contacts],
       };
-      });
-    }; 
+    });
   };
 
   checkContact = (name) => {
