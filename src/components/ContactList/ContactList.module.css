@@ -1,4 +1,5 @@
 .contacts__list {
+    max-width: 420px;
     margin-left: 20px;
     padding: 0;
     list-style: inside;

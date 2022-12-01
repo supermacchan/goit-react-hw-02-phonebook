@@ -24,13 +24,26 @@ export class App extends Component {
       id: nanoid(),
       name: name,
       number: number,
-    }]
-    
-    this.setState(prevState => {
+    }];
+
+    const availabilityCheck = this.checkContact(name);
+
+    if (availabilityCheck !== undefined) {
+      alert(`${name} is already in contacts.`);
+      return;
+    } else {
+      this.setState(prevState => {
       return {
         contacts: prevState.contacts.concat(newContact),
       };
-    });
+      });
+    }; 
+  };
+
+  checkContact = (name) => {
+    return this.state.contacts.find(contact => {
+      return contact.name === name;
+    });  
   };
 
   changeFilter = event => {
@@ -43,6 +56,14 @@ export class App extends Component {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  };
+
+  deleteContact = id => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      };
+    })
   }
 
   render() {
@@ -51,16 +72,17 @@ export class App extends Component {
     return (
       <>
         <h1 className={css.phonebook__title}>Phonebook</h1>
-        <ContactForm
-          onSubmit={this.formSubmitHandler}
-        />
+        <ContactForm onSubmit={this.formSubmitHandler} />
 
         <h2 className={css.contacts__title}>Contacts</h2>
         <Filter
           value={this.state.filter}
           onChange={this.changeFilter}
         />
-        <ContactList contacts={filteredContacts} />
+        <ContactList
+          contacts={filteredContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </>
     );
   } 
